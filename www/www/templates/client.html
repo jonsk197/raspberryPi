@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Twidder - Socialize with other people around the world!</title>
+        <link href="client.css" type="text/css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+       <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+       var hash = CryptoJS.SHA1("Message");  -->
+        <script src="client.js" type="text/javascript"></script>
+        <script src="serverstub.js" type="text/javascript"></script>
+     
+      
+
+        <!--***************************          
+        /                             /
+        /        Welcomeview          /
+        /                             /
+        *****************************-->
+        <script id="welcomeview" type="text/view">  
+        <div id="main">
+
+
+        	<div id="logoandslogan"></div>
+        
+
+
+
+
+          <div id="login">
+              <h2 align="center">Login</h2>
+                  <form id="signinform" onsubmit="validateSigninForm(); return false">
+                      <label>Email:     </label> <input class="totheright"  required  id="signinemail"    type="email"    name="signinemail"    value=""><br>
+                      <br>
+                      <label>Password:  </label> <input class="totheright"  required  id="signinpassword" type="password" name="signinpassword" value=""><br>
+                      <br>
+                      <input class="submitbutton" type="submit" value="Login"><br>
+                      <label id="loginMsg"></label>
+                  </form>
+          </div> 
+
+
+
+
+
+
+          <div id="signup">
+              <h2 align="center">Sign up here</h2>
+                  <form id="signupform" action="#" onsubmit="validateSignupForm(); return false">
+                      <label>First name:  </label> <input class="totheright"  required id="firstname" type="text" name="firstname" value=""><br><br>
+                      <label>Family name: </label> <input class="totheright"  required id="familyname" type="text" name="familyname" value=""><br><br>
+                      <label>Gender:      </label> <select class="totheright" id="gender" name="Gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        </select><br> <br>
+                      <label>City:      </label> <input class="totheright"  required id="city" type="text" name="city" value=""><br><br>
+                      <label>Country:   </label> <input class="totheright"  required id="country" type="text" name="country" value=""><br><br>
+                      <label>Email:     </label> <input class="totheright"  required id="email" type="email" name="email" value=""><br><br>
+                      <label>Password:  </label> <input class="totheright"  required id="password" pattern="(?=^.{7,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Need uppercase, lowercase, number/specialchar and more then 7 chars" type="password" name="password" value=""><br><br>
+                      <label>Repeat PSW:</label> <input class="totheright"  required id="repeatPSW" pattern="(?=^.{7,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Need uppercase, lowercase, number/specialchar and more then 7 chars" type="password" name="repeatPSW" value=""><br>
+                      <br>
+                      <input class="submitbutton" type="submit" value="Sign Up"><br>
+
+                      <label id="messageSignUp"></label>
+                      </form>        	 
+          </div>
+        </div>
+        </script>
+
+
+
+
+
+
+
+        <!--*****************************         
+        /                             /
+        /        Profilview          /
+        /                             /
+        *****************************-->
+
+        <script id="profileview" type=”text/view”>
+
+        <div id="inermain">
+
+
+
+
+
+              <div id="menu">
+                    <div class="menuButton" id="home" onclick="changeView(this)" >
+                        <label>Home</label>
+                    </div>
+                    <div class="menuButton" id="browse" onclick="changeView(this)">
+                        <label>Browse</label>
+                    </div>
+                    <div class="menuButton" id="account" onclick="changeView(this)">
+                        <label>Account</label>
+                    </div>
+              </div>
+        
+
+              <div class="content" id="homeContent">
+                    
+                    <div id="personalInfo">
+                        <br>
+                        <label id="label">Firstnamn:</label>
+                        <label id="fname"></label>
+                        <br>
+                        <br>
+                        <label id="label">Lastnamn:</label>
+                        <label id="lname"></label>
+                        <br>
+                        <br>
+                   			<label id="label">Email:</label>
+                        <label id="email"></label>
+                        <br>
+                        <br>
+                        <label id="label">Gender:</label>
+                        <label id="gender"></label>
+                        <br>
+                        <br>
+                        <label id="label">City:</label>
+            						<label id="city"></label>
+                        <br>
+                        <br>
+                        <label id="label">Country:</label>
+                        <label id="country"></label>
+                        <br>
+                    </div>
+					
+					 
+				          	<div id="postArea">
+                        <textarea id="postMsg" rows="3" cols="43"></textarea>
+                        <button id="postButton" onclick="postMsg()">Post</button>
+                        <button id="wallRefreshButton" onclick="loadWall()">Refresh Wall</button>
+                        
+                        <div id="myWall">
+                            <!--add_post_here-->
+                        </div>
+                    </div>
+					
+					
+                </div>  
+
+
+                <div class="content hide" id="browseContent">
+				
+
+                		<div id="searchDiv">  
+                          <form id="browseForm" action="#" onsubmit="searchUsers();return false">
+                              <label>Search:  </label> <input id="searchedEmail" required type="search" name="searchfield" value="" results=5 width="48">
+                              <input class="submitbutton" type="submit" value="Search user by email">   
+                          </form>   
+						        </div>
+					  
+					          <div id="personalInfoBrowser" class="hide">
+                          <br>
+                          <br>
+                          <label id="label">Firstnamn:</label>
+                          <label id="fnameBrowser"></label>
+	                    	  <br>
+                          <br>
+	                        <label id="label">Lastnamn:</label>
+	                        <label id="lnameBrowser"></label>
+                          <br>
+                          <br>
+                          <label id="label">Email:</label>
+	                        <label id="emailBrowser"></label>
+	                        <br>
+                          <br>
+	                        <label id="label">Gender:</label>
+	                        <label id="genderBrowser"></label>
+	                        <br>
+                          <br>
+	                        <label id="label">City:</label>
+                          <label id="cityBrowser"></label>
+                          <br>
+                          <br>
+                          <label id="label">Country:</label>
+	                        <label id="countryBrowser"></label>
+	                        <br>
+                    </div>
+                    <div id="browserPostArea" class="hide">
+	                        <textarea id="browserPostMsg" rows="3" cols="43"></textarea>
+	                        <button id="browserPostButton" onclick="postBrowseMsg()">Post</button>
+	                        <button id="wallRefreshButton" onclick="loadBrowseWall()">Refresh Wall</button>
+	                        
+	                        <div id="browseWall">
+	                            <!--add_post_here-->
+	                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="content hide" id="accountContent">
+                    <div id="changePassword">
+                          <h2>Change password:</h2>
+                          <form id="changePasswordForm" action="#" onsubmit="checkForChangePassword(); return false">
+                                  <label>Current password:  </label> <input class="totheright"  required id="oldpassword" type="password" name="oldpassword"       value="">  
+                                  <br>
+                                  <br>
+                                  <label>New password:      </label> <input oninput="isPasswordLongEnough()" class="totheright"  pattern="(?=^.{7,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+title="Need uppercase, lowercase, number/specialchar and more then 7 chars" required id="newpassword" type="password" name="newpassword" value="">
+                                  <br>
+                                  <br>
+                                  <label>Repeat new password: </label> <input oninput="areThePasswordsTheSame()" class="totheright"  pattern="(?=^.{7,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+title="Need uppercase, lowercase, number/specialchar and more then 7 chars" required id="repeatnewPSW" type="password" name="repeatnewPSW"value="">
+                                  <br>
+                                  <br>
+                                  <input class="changePasswordButton" type="submit" value="Change password">
+                                  <br>
+                      						<label id="changedPW"></label>
+                          </form> 
+                    </div>
+
+                    <div id="signut">
+                          <h2>Sign out:</h2>
+                          <button onclick="signout()">Sign out</button> 
+                          <br>
+                          <br>
+                          <label id="signoutLabel"></label>
+                    </div>
+        </div>
+        </script>
+
+    </head>
+
+    <body>
+
+    <div id="showview"></div>
+
+
+    </body>
+</html>
